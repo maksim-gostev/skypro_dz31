@@ -2,6 +2,7 @@ from rest_framework import serializers
 from ads.models import Ad, Category
 from users.models import User
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
 
 def validate_is_published(value):
     if value == True:
@@ -29,6 +30,7 @@ class AdCreateSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(queryset=User.objects.all(),
                                           slug_field='username')
     is_published = serializers.BooleanField(validators=[validate_is_published])
+    price = serializers.IntegerField(validators=[MinValueValidator(0)])
     class Meta:
         model = Ad
         exclude = ['image']
