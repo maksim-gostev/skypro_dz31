@@ -1,6 +1,15 @@
+from datetime import date
+
 from rest_framework import serializers
 from users.models import User, Location
 from django.core.exceptions import ValidationError
+
+def validate_age(value):
+    today = date.today()
+    age = today.year - value.year - ((today.month, today.day) < (value.month, value.day))
+    if age < 10:
+        raise ValidationError('Вы слишком молоды')
+
 
 def validate_email(value):
     if 'rambler.ru' in value:
@@ -24,6 +33,7 @@ class UsersCreateSerializer(serializers.ModelSerializer):
                                            queryset=Location.objects.all(),
                                            slug_field='name')
     email = serializers.CharField(max_length=100, validators=[validate_email])
+    birth_date = serializers.DateField(validators=[validate_age])
 
 
     class Meta:
