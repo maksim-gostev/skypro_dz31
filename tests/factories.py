@@ -15,7 +15,7 @@ class UserFactory(factory.django.DjangoModelFactory):
 
     role = 'member'
     age = 20
-    username = "test"
+    username = factory.Sequence(lambda n: 'user{0}'.format(n))
     password = "test"
 
 

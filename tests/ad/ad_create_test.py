@@ -14,7 +14,7 @@ def test_ad_create(client, user, category):
     }
 
     data = {
-        "author": "test",
+        "author": "user1",
         "category": "test",
         "name": "Стол из слэба и эпоксидной смолы",
         "price": 24000,

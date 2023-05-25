@@ -51,3 +51,4 @@ class AdUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ad
         exclude = ['image']
+
