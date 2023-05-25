@@ -29,9 +29,8 @@ class CategoryFactory(factory.django.DjangoModelFactory):
 class AdFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Ad
-    user = UserFactory
     name = "test"
-    author = "test"
+    author = factory.SubFactory(UserFactory)
     price = 100
     is_published = False
     category = factory.SubFactory(CategoryFactory)
